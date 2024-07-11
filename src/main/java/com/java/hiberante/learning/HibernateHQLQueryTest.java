@@ -28,20 +28,31 @@ public class HibernateHQLQueryTest {
        	 transaction =session.beginTransaction();
        	 
        	 
-       	 //Query query= session.createQuery("select p from Product p where p.productprice > 90000");
-       	 Query query= session.createQuery("select p from Product p where p.productprice > :productprice");
-       	 query.setParameter("productprice",80000.0);
-       	  List<Product> productList = query.list();
-       	 System.out.println("productList list size is:"+productList.size());
-       	 System.out.println("********************");
-			
-			  for(Product p :productList) {
-				  
-			  
-			  System.out.println(p);
-			  
-			  } System.out.println("********************");
-			 
+       	 Query query= session.createQuery("select p.productId from Product p");
+       	 
+	   	 List<Product> productList = query.list();
+	   	 System.out.println("productList list size is:"+productList.size());
+	   	 System.out.println("********************");
+	   	 
+	   	 for(Product p :productList) {
+	   		 System.out.println(p);
+	   	 }
+	   	 System.out.println("********************");
+			/*
+			 * Query query= session.
+			 * createQuery("select p from Product p where p.productprice > :productprice");
+			 * query.setParameter("productprice",80000.0); List<Product> productList =
+			 * query.list();
+			 * System.out.println("productList list size is:"+productList.size());
+			 * System.out.println("********************");
+			 * 
+			 * for(Product p :productList) {
+			 * 
+			 * 
+			 * System.out.println(p);
+			 * 
+			 * } System.out.println("********************");
+			 */
         } catch(Exception e) {
        	 if (transaction != null) {
                 // Rollback the transaction in case of an error

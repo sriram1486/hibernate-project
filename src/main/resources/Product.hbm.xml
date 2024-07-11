@@ -20,4 +20,16 @@
 			<column name="product_price"/> 
 		</property>
     </class> 
+    
+ 
+   
+    <query name="GET_ALL_PRODUCTS" >
+          <![CDATA[from Product]]>
+   </query>
+   
+    <query name="GET_PRODUCT_ID">
+          <![CDATA[ select  p from  Product p where p.productId=1]]>
+   </query>
+ 
+    
 </hibernate-mapping>

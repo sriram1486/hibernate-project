@@ -1,5 +1,8 @@
 package com.java.hiberante.learning;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -28,30 +31,47 @@ public class HibernateAppliction
         	 transaction =session.beginTransaction();
         	 // product object created
         	 Product product = new Product(); // transient state
-      		 product.setProductId(1);
-             product.setProductName("HP Laptop");
-     		 product.setDescription(" I5 Processor");
-             product.setProductprice(70000.00);
+      		 product.setProductId(3);
+             product.setProductName("Dell Laptop");
+     		 product.setDescription(" I7 Processor");
+             product.setProductprice(83000.00);
              //perform some operations[create,update,delete,read] on session
-             session.save(product);//persist state
-             //commit the transaction
-        	 Product product1=(Product)session.load(Product.class, 3);
-        	 System.out.println(" before update Prodcut information Is:"+product1);
-        	 product1.setProductprice(75000);
-        	 session.save(product1);
-        	 System.out.println(" before update Prodcut information Is:"+product1);
-        	 Product product2=(Product)session.load(Product.class, 3);
-        	 System.out.println(" before update Prodcut information Is:"+product1);
-        	 
-        	 //session.delete(product2);
-        	 System.out.println("Is session open"+session.isOpen());
-           // transaction.commit();
-            //session.clear();//closed or detached
-            System.out.println("Is session open"+session.isOpen());
-            //Session session1= sessionFactory.openSession();
-           // transaction =session1.beginTransaction() ;		
-            //Product product3=(Product)session1.load(Product.class, 3);
-       	 //System.out.println(" prodcut3 update Prodcut information Is:"+product3);
+             //session.saveOrUpdate(product);//persist state
+             //transaction.commit();
+             
+			/*
+			 * Product p =(Product)session.get(Product.class, 1);
+			 * System.out.println("Product data is p:::"+p);
+			 * 
+			 * //session.evict(p); Product p1 =(Product)session.get(Product.class, 1);
+			 * System.out.println("Product data is p1:::"+p1); session.evict(p1); Product p2
+			 * =(Product)session.get(Product.class, 1);
+			 * System.out.println("Product data is p2:::"+p2);
+			 */
+             /*session.clear();//detached
+			 session = sessionFactory.openSession();
+			 transaction =session.beginTransaction();
+			 product =(Product)session.get(Product.class,product.getProductId() );
+			 product.setDescription("I7 Processor with windows 11");
+			 session.merge(product);
+			 transaction.commit();
+             
+			 System.out.println("Product data is p:::"+product);*/
+            Query namedQuery=session.getNamedQuery("GET_ALL_PRODUCTS");
+            
+             List<Product> productList=namedQuery.list();
+             for(Product p:productList) {
+            	 System.out.println(p);
+	             
+             }
+             
+             Query namedQuery1=session.getNamedQuery("GET_PRODUCT_ID");
+             List<Product> productList1=namedQuery1.list();
+             for(Product p1:productList1) {
+            	 System.out.println(p1);
+	             
+             }
+             
         	 
          } catch(Exception e) {
         	 if (transaction != null) {

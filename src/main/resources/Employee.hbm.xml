@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE hibernate-mapping PUBLIC 
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"> 
+<hibernate-mapping> 
+      <!-- com.geeksforgeeks.GeekUserDetails  
+         is the name of the java class 
+          GeekUserDetails is the name of the table -->
+    <class name="com.java.hiberante.learning.model.Employee" table="employee"> 
+        <id name="productId" type="int" column="employee_id"> 
+            <generator class="assigned"/> 
+        </id> 
+        <property name="employeeName" type="string"> 
+            <column name="employee_name"/> 
+        </property> 
+        <property name="jon" type = "string"> 
+            <column name="job"/> 
+        </property> 
+		<property name="mgr" type="decimal"> 
+			<column name="mgr"/> 
+		</property>
+		<property name="hiredate" type="date"> 
+			<column name="hiredate"/> 
+		</property>
+		<property name="salary" type="date"> 
+			<column name="salary"/> 
+		</property>
+		<property name="commission" type="decimal"> 
+			<column name="commission"/> 
+		</property>
+		<property name="deptId" type="int"> 
+			<column name="dept_id"/> 
+		</property>
+		
+    </class> 
+</hibernate-mapping>

@@ -29,6 +29,9 @@
           
           <!-- We need to provide the exact mapping file  
              which we have created earlier -->
-        <mapping resource="Product.hbm.xml" /> 
+             <mapping class="com.java.hiberante.learning.entity.Employee" />
+           <!--<mapping class="com.java.hiberante.learning.entity.Customer" />-->
+           <!--  <mapping resource="Employee.hbm.xml" /> -->
+            <mapping resource="Product.hbm.xml" />
     </session-factory> 
 </hibernate-configuration>
