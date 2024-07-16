@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE hibernate-mapping PUBLIC 
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd"> 
+<hibernate-mapping> 
+      <!-- com.geeksforgeeks.GeekUserDetails  
+         is the name of the java class 
+          GeekUserDetails is the name of the table -->
+    <class name="com.java.hiberante.learning.inheritance.tbh.Payment" table="payment"> 
+        <id name="paymentId" type="int" column="payment_id"> 
+            <generator class="native"/> 
+        </id> 
+        <!--<discriminator column="PAYMENT_TYPE" type="string"/>-->
+
+        <property name="amount" type="big_decimal"> 
+            <column name="amount"/> 
+        </property> 
+        <property name="paymentDate" type = "date"> 
+            <column name="payment_date"/> 
+        </property> 
+       <!-- <subclass name="com.java.hiberante.learning.inheritance.tbh.CreditCard"  discriminator-value="creditCard">
+			 <property name="creditCardType" type="string"> 
+                <column name="credit_card_type"/> 
+            </property>	
+		</subclass>
+		<subclass name="com.java.hiberante.learning.inheritance.tbh.UPIPayment" discriminator-value="uPIPayment">
+			 <property name="upiPaymentType" type="string"> 
+               <column name="upi_payment_type"/>   
+             </property>
+		</subclass>-->
+		<joined-subclass name="com.java.hiberante.learning.inheritance.tbh.CreditCard" table="creditcard">
+			<key column="payment_id"/>
+			<property name="creditCardType" type="string"> 
+                <column name="credit_card_type"/> 
+            </property>	
+         </joined-subclass>
+		<joined-subclass name="com.java.hiberante.learning.inheritance.tbh.UPIPayment" table="upipayment"> 
+			<key column="payment_id"/>
+			 <property name="upiPaymentType" type="string"> 
+               <column name="upi_payment_type"/>   
+             </property>
+		</joined-subclass>
+		<joined-subclass name="com.java.hiberante.learning.inheritance.tbh.WalletPayment" table="wallet_payment"> 
+			<key column="payment_id"/>
+			 <property name="walletPaymentType" type="string"> 
+               <column name="wallet_payment_type"/>   
+             </property>
+		</joined-subclass>
+		
+		
+		
+    </class> 
+</hibernate-mapping>

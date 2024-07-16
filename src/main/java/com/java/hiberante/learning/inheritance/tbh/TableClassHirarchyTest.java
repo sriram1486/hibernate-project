@@ -1,7 +1,6 @@
-package com.java.hiberante.learning;
+package com.java.hiberante.learning.inheritance.tbh;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -13,10 +12,11 @@ import com.java.hiberante.learning.entity.Employee;
 import com.java.hiberante.learning.util.DateUtils;
 import com.java.hiberante.learning.util.HibernateUtil;
 
-public class EmployeeTest {
+public class TableClassHirarchyTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
 		 SessionFactory sessionFactory = null;
          Session session = null;
          Transaction transaction = null;
@@ -28,31 +28,35 @@ public class EmployeeTest {
         	 // begin transaction 
         	 transaction =session.beginTransaction();
         	 //create employee object
-        	 Employee emp= new Employee();
-        	 emp.setEmployeeId(7876);
-        	 emp.setEmployeeName("ADAMS");
-        	 emp.setJob("CLERK");
-			 emp.setMgr(new BigDecimal(7788));
-			 emp.setHiredate(DateUtils.stringToDate("8-09"
-			 		+ "-1981"));
-			 emp.setSalary(new BigDecimal(1500));
-			 emp.setCommission(new BigDecimal(0.00));
-			 emp.setDeptId(30);
-			 session.saveOrUpdate(emp);	
-             transaction.commit();
+        	
+        	 Payment payment = new Payment();
+			 payment.setPaymentId(1);
+			 payment.setAmount(new BigDecimal(2000.00));
+			 payment.setPaymentDate(DateUtils.stringToDate("8-09-2024"));	
 			 
-			 Query query = session.getNamedQuery("getEmployees");
-			 List<Employee> list = query.list();
-			 for(Employee e:list) {
-				 System.out.println(e);
-			 }
-        
-			 Query query1 = session.getNamedQuery("getEmployeeBySalary");
-			 query1.setParameter("salary", new BigDecimal(50000.00));
-			 List<Employee> list1 = query1.list();
-			 for(Employee e1:list1) {
-				 System.out.println(e1);
-			 }
+			 //session.saveOrUpdate(payment);
+        	 
+        	 CreditCard creditCard = new CreditCard();
+			 //creditCard.setPaymentId(1);
+        	 creditCard.setCreditCardType("VISA");
+			 creditCard.setAmount(new BigDecimal(2000.00));
+			 creditCard.setPaymentDate(DateUtils.stringToDate("8-09-2024"));	
+			 
+			 UPIPayment upiPayment = new UPIPayment();
+			// upiPayment.setPaymentId(1);
+			 upiPayment.setUpiPaymentType("Gpay");
+			 upiPayment.setAmount(new BigDecimal(2000.00));
+			 upiPayment.setPaymentDate(DateUtils.stringToDate("10-09-2024"));
+			 WalletPayment walletPayment = new WalletPayment();
+			// walletPayment.setPaymentId(1);
+			 walletPayment.setWalletPaymentType("Paytm");
+			 walletPayment.setAmount(new BigDecimal(4000.00));
+			 walletPayment.setPaymentDate(DateUtils.stringToDate("12-09-2024"));
+			 
+			 session.saveOrUpdate(creditCard);
+			 session.saveOrUpdate(upiPayment);
+			 session.saveOrUpdate(walletPayment);
+			 transaction.commit();
         	 
          } catch(Exception e) {
         	 if (transaction != null) {
